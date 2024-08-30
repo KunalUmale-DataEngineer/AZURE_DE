@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "kunal-adfb9"
+		},
+		"ls_adls_accountKey": {
+			"value": ""
+		},
+		"ls_sql_server_connectionString": {
+			"value": ""
+		},
+		"ls_tgt_sql_srv_password": {
+			"value": ""
+		},
+		"ls_adls_properties_typeProperties_url": {
+			"value": "https://kunalstgb9.dfs.core.windows.net/"
+		},
+		"ls_key_vault_sql_properties_typeProperties_connectionString_secretName": {
+			"value": "kunalsql"
+		},
+		"ls_sql_key_properties_typeProperties_baseUrl": {
+			"value": "https://Kvault9833.vault.azure.net/"
+		},
+		"ls_tgt_sql_srv_properties_typeProperties_server": {
+			"value": "kunalb9.database.windows.net"
+		},
+		"ls_tgt_sql_srv_properties_typeProperties_database": {
+			"value": "tgt_azure"
+		},
+		"ls_tgt_sql_srv_properties_typeProperties_userName": {
+			"value": "kunal"
+		},
+		"tumbling_trigger_properties_pipeline_parameters_StartDate": {
+			"value": "@trigger().outputs.windowStartTime"
+		},
+		"tumbling_trigger_properties_pipeline_parameters_EndDate": {
+			"value": "@trigger().outputs.windowEndTime"
+		}
+	}
+}
