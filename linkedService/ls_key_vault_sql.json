@@ -1,0 +1,19 @@
+{
+	"name": "ls_key_vault_sql",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ls_sql_key",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "kunalsql",
+				"secretVersion": "beee75268ab54897afc96cad5e57cd5d"
+			}
+		}
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"name": "kunal-adfb9",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "1d734ab7-7834-4cbf-a816-18f94a0077db",
+		"tenantId": "734d77fb-5421-4596-86fd-274024e9d8e4"
+	}
+}

@@ -1,0 +1,154 @@
+{
+	"name": "pl_sp",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ADF_NM",
+					"value": {
+						"value": "@pipeline().DataFactory",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "runid",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "PipelineName",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "RUNID",
+					"value": {
+						"value": "@pipeline().RunId",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "PipelineName",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "PL_NM",
+					"value": {
+						"value": "@pipeline().Pipeline",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Stored procedure1",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "runid",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[usp_adfpipelinedetails]",
+					"storedProcedureParameters": {
+						"adfname": {
+							"value": {
+								"value": "@variables('ADF_NM')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"pipeline_runid": {
+							"value": {
+								"value": "@variables('RUNID')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"pipelinename": {
+							"value": {
+								"value": "@variables('PL_NM')",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "ls_sql_server",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"variables": {
+			"ADF_NAME": {
+				"type": "Array"
+			},
+			"Run_Id": {
+				"type": "Array"
+			},
+			"PipeLine_Name": {
+				"type": "Array"
+			},
+			"ADF_NM": {
+				"type": "String"
+			},
+			"PL_NM": {
+				"type": "String"
+			},
+			"RUNID": {
+				"type": "String"
+			},
+			"file_name_append_var": {
+				"type": "Array"
+			},
+			"file_name_set_variable": {
+				"type": "Array"
+			}
+		},
+		"folder": {
+			"name": "SET_VARIABLE"
+		},
+		"annotations": [],
+		"lastPublishTime": "2024-08-12T18:29:28Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
